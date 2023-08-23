@@ -1,0 +1,46 @@
+<section>
+    <div class="w-50">
+        <br>
+        <form [formGroup]="frmProducto" (ngSubmit)="agregarProducto()" enctype="multipart/form-data"  class="was-validated border-1">
+       
+            <div>
+                <h1 class="text-center text-bg-dark">Registrar Producto
+                </h1>
+            </div>
+            <div class="mb-3">
+                <label for="txtCodigo" class="fw-bold">Codigo:</label>
+                <input type="number" formControlName="txtCodigo" value="" id="txtCodigo" class="form-control" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="txtNombre" class="fw-bold">Nombre:</label>
+                <input type="text" formControlName="txtNombre" value="" id="txtNombre" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtPrecio" class="fw-bold">Precio:</label>
+                <input type="number" formControlName="txtPrecio"  id="txtPrecio" class="form-control" value="" required>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="file"  formControlName="fileFoto" id="fileFoto" class="form-control redondeado" accept=".jpg" (change)="onFileSelect($event)" required>
+                <label for="fileFoto" class="fw-bold" style="color: black;">Foto (jpg):</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select formControlName="cbCategoria" id="cbCategoria" class="form-select" required>
+                    <option value="">Seleccione</option>
+                    <option [value]="categoria.id" *ngFor="let categoria of listaCategorias" class="fw-bold">{{categoria.catNombre}}</option>
+                </select>
+                <label for="cbCategoria" class="fw-bold">Categoria:</label>
+            </div>
+    
+           
+            <div class="ax">
+                <button class="btn btn-dark fw-bold m-2" style="color: white;">Registrar</button>
+                <a href="/productos">
+                    <button type="button" class="btn btn-warning m-2">Cancelar</button>
+                </a>
+            </div>
+         
+        </form>
+    <div class="text-center">{{mensaje}}</div>
+</div>
+</section>

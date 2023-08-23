@@ -1,0 +1,145 @@
+
+<br>
+<!-- Botón Agregar -->
+<div class="btnAgregar">
+    <a href="/producto"><button class="btn btn-dark fw-bold" style="color: white;">Agregar</button></a>
+  </div>
+  
+  <!-- Encabezado -->
+  <h3 style="text-align: center; color: black;" class="fw-bold">GESTIONAR PRODUCTOS</h3>
+  
+  <!-- Tabla de Productos -->
+  <div class="table-responsive">
+    <table class="table" id="tblTienda">
+      <thead class="bg-black text-white text-center">
+        <tr>
+          <th class="text-center">Codigo</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Precio</th>
+          <th class="text-center">Categoria</th>
+          <th class="text-center">Foto</th>
+          <th class="text-center" style="color: purple;">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="fila" *ngFor="let producto of listaProductos">
+          <td class="text-center">{{ producto.proCodigo }}</td>
+          <td class="text-center">{{ producto.proNombre }}</td>
+          <td class="text-end">{{ producto.proPrecio | currency: "COP" }}</td>
+          <ng-container *ngFor="let categoria of listaCategorias">
+            <td *ngIf="categoria.id == producto.proCategoria">{{ categoria.catNombre }}</td>
+          </ng-container>
+          <td class="text-center">
+            <img src="{{ producto.proFoto }}" width="50" height="50">
+          </td>
+          <td class="text-center">
+            <!-- Botón para abrir modal de edición -->
+            <ion-icon name="create" id="edit" (click)="openEditModal(producto)"></ion-icon>
+
+            <ion-icon name="trash-outline" id="trash" (click)="abrirModalEliminar(producto.proCodigo)"></ion-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal de Eliminación -->
+  <div class="modal" id="modalEliminar" [ngStyle]="{'display': display}">
+    <!-- ... contenido de modal de eliminación ... -->
+  </div>
+  
+  <!-- Modal de Edición -->
+  <div class="modal" id="modalEditar" [ngStyle]="{'display': editDisplay}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Producto</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarEditarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="submitEditForm()">
+            <!-- Agregar campos de formulario para edición aquí -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<br>
+<!-- Modal de Edición -->
+<div class="modal" id="modalEditar" [ngStyle]="{'display': editDisplay}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Producto</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarEditarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="submitEditForm()">
+            <div class="form-group">
+              <label for="codigo">Código:</label>
+              <input type="number" id="codigo" class="form-control" [(ngModel)]="editedProducto.proCodigo" name="codigo">
+            </div>
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" class="form-control" [(ngModel)]="editedProducto.proNombre" name="nombre">
+            </div>
+            <div class="form-group">
+              <label for="precio">Precio:</label>
+              <input type="number" id="precio" class="form-control" [(ngModel)]="editedProducto.proPrecio" name="precio">
+            </div>
+            <div class="form-group">
+              <label for="categoria">Categoría:</label>
+              <select id="categoria" class="form-control" [(ngModel)]="editedProducto.proCategoria" name="categoria">
+                  <option value="">Seleccione</option>
+                  <option [value]="categoria.id" *ngFor="let categoria of listaCategorias">{{ categoria.catNombre }}</option>
+              </select>
+          </div>
+          
+            <div class="form-group">
+                <label for="foto">Foto:</label>
+                <input type="file" id="foto" class="form-control" [(ngModel)]="editedProducto.proFoto" (change)="onFileSelect($event)">
+              </div>              
+            <!-- Display the current photo -->
+            <div class="form-group">
+              <label for="currentFoto">Foto Actual:</label>
+              <img src="{{ editedProducto.proFoto }}" alt="Foto Actual" width="50" height="50" class="current-photo">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+<!-- The Modal -->
+<div class="modal"  id="modalEliminar" [ngStyle]="{'display':display}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminar Producto</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()"></button>
+        </div>
+  
+        <!-- Modal Contenido-->
+        <div class="modal-body">
+            ¿Estás seguro de eliminar el Producto?
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <a href="" id="rutaEliminar">
+                <button type="button" class="btn btn-success" id="btnEliminar" (click)="eliminarProducto()">Si</button>
+            </a>
+            <button type="button" class="btn btn-danger" id="btnCancelarModal" (click)="cerrarModal()" data-dismiss="modal">No</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+

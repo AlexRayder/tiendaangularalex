@@ -1,0 +1,18 @@
+#iconos{
+  
+}
+
+#edit{
+   color: rgb(0, 70, 221);
+   font-size: 5vh;
+}
+
+#trash{
+    color: red;
+    font-size: 5vh;
+}
+
+.btnAgregar{
+    display: grid;
+    place-items: center;
+}

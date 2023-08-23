@@ -1,0 +1,9 @@
+section{
+    display: grid;
+    place-items: center;
+}
+
+    .ax{
+    display: flex;
+    justify-content: center;
+    }

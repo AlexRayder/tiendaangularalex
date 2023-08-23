@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "ClienteTienda",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

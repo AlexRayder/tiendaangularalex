@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tiendaangularalex": {
+      "hosting": {
+        "ClienteTienda": [
+          "tiendaangularalex"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tiendaangularalex"
+  }
+}

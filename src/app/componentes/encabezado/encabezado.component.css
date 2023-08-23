@@ -1,0 +1,5 @@
+
+.encabezado{
+    display: grid;
+    place-items: center;
+}
